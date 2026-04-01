@@ -39,6 +39,16 @@ def complete_task(task_id, user_phone):
     finally:
         session.close()
 
+def get_all_tasks_for_user(user_phone):
+    session = get_session()
+    try:
+        tasks = session.query(Task).filter(
+            Task.user_phone == user_phone
+        ).all()
+        return tasks
+    finally:
+        session.close()
+
 def delete_task(task_id, user_phone):
     session = get_session()
     try:
